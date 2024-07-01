@@ -1,0 +1,6 @@
+CREATE TABLE tasks(
+    id int not null auto_increment primary key,
+    title varchar(100) NOT NULL,
+    status boolean DEFAULT false,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

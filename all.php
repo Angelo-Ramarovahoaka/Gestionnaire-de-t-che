@@ -1,7 +1,30 @@
 <?php
 require'db.php';
-    $stmt=$pdo->query('select * from tasks order by created_at desc');
-    $tasks=$stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    function searchTask() {
+        require 'db.php';
+        
+        if (isset($_GET["search"])) {
+            $search = $_GET["search"];
+            $stmt = $pdo->prepare("
+                SELECT * FROM tasks 
+                WHERE title REGEXP :search 
+                OR description REGEXP :search 
+                ORDER BY created_at DESC
+            ");
+            
+            // Ajouter des jokers pour REGEXP
+            $searchRegExp = '.*' . $search . '.*';
+            $stmt->execute(['search' => $searchRegExp]);
+            $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $tasks;
+        }
+        else{
+            $stmt=$pdo->query('select * from tasks order by created_at desc');
+            $tasks=$stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $tasks;
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,8 +36,19 @@ require'db.php';
     <title>gestion de tache</title>
 </head>
 <body>
+<div class="d-flex justify-content-around nav p-2">
+    <h1 class="">MY TASKS</h1>
+    <div class="nav-items d-flex">
+    
+        <form action="" method="GET">
+            <input type="text" name="search" id="search" placeholder="search">
+            <button type="submit">search</button>
+        </form>
     <button><a href="add_task.php">ADD-TASKS </a></button>
-    <ul class="d-flex align-item-center justify-content-around flex-wrap p-0">
+    </div>
+</div>
+<?php $tasks=searchTask()?>
+    <ul class="d-flex align-item-center justify-content-around flex-wrap w-100 h-100">
         <?php foreach ($tasks as $task){
             echo'
         <li class="task-item d-flex flex-column justify-content-center p-3 m-2">

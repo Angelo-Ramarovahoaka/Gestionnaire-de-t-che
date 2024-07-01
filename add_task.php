@@ -1,13 +1,19 @@
 <?php
 function addTasks(){
+    session_start();
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: connection.php");
+        exit;
+    }
     
-    require'db.php';
    if(isset($_POST["title"]) && isset($_POST["description"])){
+    require'db.php';
     $title=$_POST["title"];
     $description=$_POST["description"];
+    $user_id = $_SESSION['user_id'];
     
-    $stmt=$pdo->prepare("INSERT INTO tasks(title,description) VALUES (?,?)");
-    $stmt->execute([$title,$description]);
+    $stmt=$pdo->prepare("INSERT INTO tasks(user_id,title,description) VALUES (?,?,?)");
+    $stmt->execute([$user_id,$title,$description]);
     header('location: all.php');
    }
 }
@@ -32,7 +38,7 @@ function addTasks(){
  <form action="<?php addTasks() ?>" method="POST" class="form d-flex align-items-center flex-column justify-content-center">
         <input type="text" name="title" placeholder="title de la tâche" required>
         <textarea type="text" name="description" placeholder="description de la tâche" required></textarea>
-        <button class="btn-submit" type="submit">ajouter</button>
+        <button class="btn-submit" type="submit">submit</button>
     </form> 
  </div>
     

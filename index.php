@@ -11,8 +11,8 @@
     <div class="d-flex justify-content-center flex-column align-items-center h-100 w-100 ">
         <h1 class="">MY TASKS</h1>
         <div class="">
-            <button><a href="all.php">ALL-TASKS </a></button>
-            <button><a href="add_task.php">ADD-TASKS </a></button>
+            <button><a href="connection.php">LOGIN</a></button>
+            <button><a href="inscription.php">INSCRIPTION</a></button>
         </div>
     </div> 
 </body>

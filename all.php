@@ -1,26 +1,35 @@
 <?php
-require'db.php';
-    
     function searchTask() {
+        session_start();
+
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: login.php");
+        }
+
         require 'db.php';
-        
+        $user_id = $_SESSION['user_id'];
         if (isset($_GET["search"])) {
             $search = $_GET["search"];
             $stmt = $pdo->prepare("
                 SELECT * FROM tasks 
-                WHERE title REGEXP :search 
-                OR description REGEXP :search 
+                WHERE (title REGEXP :search 
+                OR description REGEXP :search) 
+                AND user_id = :user_id
                 ORDER BY created_at DESC
             ");
             
             // Ajouter des jokers pour REGEXP
             $searchRegExp = '.*' . $search . '.*';
-            $stmt->execute(['search' => $searchRegExp]);
+            $stmt->execute([
+                'search' => $searchRegExp,
+                'user_id'=>$user_id
+            ]);
             $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $tasks;
         }
         else{
-            $stmt=$pdo->query('select * from tasks order by created_at desc');
+            $stmt=$pdo->prepare('SELECT * FROM tasks WHERE user_id = :user_id ORDER BY created_at DESC');
+            $stmt->execute(['user_id'=>$user_id]);
             $tasks=$stmt->fetchAll(PDO::FETCH_ASSOC);
             return $tasks;
         }
@@ -45,6 +54,7 @@ require'db.php';
             <button type="submit">search</button>
         </form>
     <button><a href="add_task.php">ADD-TASKS </a></button>
+    <button><a href="logout.php">LOGOUT</a></button>
     </div>
 </div>
 <?php $tasks=searchTask()?>

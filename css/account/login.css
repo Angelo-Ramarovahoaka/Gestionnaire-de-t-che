@@ -1,0 +1,114 @@
+:root{
+    --color_1: #f0f0f0;
+    --color_2: #60826f;
+    --color_3: #45a049;
+    --color_4: #5a67d8;
+    --color_5: #2ecc71;
+ }
+ *{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color_1);
+}
+/* Style pour le conteneur de la loader */
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+h1{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: absolute;
+    top: 10%;
+    color: var(--color_3);
+}
+/* Style pour le spinner */
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 8px solid #ccc;
+    border-top: 8px solid var(--color_5);
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
+
+/* Animation pour le spinner */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Style pour le bouton d'inscription */
+.btn{
+    position: absolute;
+    display: none;
+}
+.signup-btn {
+    padding: 10px 20px;
+    background-color: var(--color_2);
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px; 
+    border-radius: 5px;
+}
+.signup-btn:hover{
+    background-color: var(--color_5);
+}
+.signup-btn >a{
+    color: white;
+    text-decoration: none;
+}
+
+/* Afficher le bouton après l'animation */
+.loader-container.loaded .btn {
+    display: block;
+    column-gap: 40px;
+    opacity: 1;
+}
+/* Masquer le spinner après l'animation */
+.loader-container.loaded .spinner {
+    display: none;
+}
+
+/* form */
+#login{
+    background-color: var(--color_2);
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    
+}
+.text{
+    display: flex;
+    flex-direction: column;  
+    gap: 40px;
+    padding: 40px;
+    background-color: var(--color_3);
+}
+.text>input{
+    width: 400px;
+    height: 50px;
+    text-align: center;
+}
+.text>input:focus{
+    border-color: #5a67d8;
+    outline: none;
+}
+.btn-btn{
+    display: flex;
+    padding: 20px 40px;
+    justify-content: space-between;
+}
+
+ 

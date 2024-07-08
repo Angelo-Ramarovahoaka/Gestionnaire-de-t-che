@@ -1,0 +1,339 @@
+:root{
+    --color_1: #f0f0f0;
+    --color_2: #60826f;
+    --color_3: #2ecc71;
+    --color_4: #5a67d8;
+    --color_5: #4e4e54;
+ }
+/* Style général pour la navigation */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color_3);
+    padding: 10px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: var(--color_1);
+    font-family: 'Arial', sans-serif;
+}
+
+/* Style pour le profil utilisateur */
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.user-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    background-color: var(--color_5);
+    border: 2px solid var(--color_2);
+    /* object-fit: cover; */
+}
+
+.username {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ecf0f1;
+}
+
+/* Style pour le titre du projet */
+.title-project {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ecf0f1;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Style pour les paramètres */
+.settings{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+.settings button {
+    background-color: transparent;
+    border: none;
+    color: var(--color_1);
+    cursor: pointer;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+}
+.logout>a{
+    color: var(--color_1);
+    text-decoration: none;
+}
+.settings button:hover {
+    transform: scale(1.3);
+
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .profile {
+        margin-bottom: 10px;
+    }
+
+    .title-project {
+        margin: 10px 0;
+        font-size: 20px;
+    }
+    .title{
+        display: flex;
+        justify-content: center;
+    }
+    .settings{
+        display: flex;
+        justify-content: end;
+        align-self: flex-end;
+    }
+    .title,.profile,.settings{
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .user-photo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .username {
+        font-size: 16px;
+    }
+
+    .title-project {
+        font-size: 18px;
+    }
+
+    .settings button {
+        font-size: 20px;
+    }
+}
+
+
+
+/* Style général pour la page */
+
+main {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Style pour les événements */
+.event {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 20px;
+    min-width: none;
+    width: 80%;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.event-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.event-title {
+    font-size: 1.5em;
+    border: none;
+    background: none;
+    color: #333;
+    font-weight: bold;
+    width: 70%;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.event-title:focus {
+    outline: none;
+    border-bottom-color: #007bff;
+}
+
+.event-date {
+    font-size: 0.9em;
+    color: #777;
+}
+
+.event-details {
+    margin-top: 20px;
+}
+
+.event-description {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+    background-color: #f1f1f1;
+}
+
+.event-timing {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.event-start {
+    display: flex;
+    flex-direction: column;
+}
+
+.event-start label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.event-start input[type="date"],
+.event-start input[type="time"] {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+/* Style pour la recherche de tâches */
+.task-search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #e9ecef;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search input[type="text"] {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+    width: calc(100% - 50px);
+}
+
+.search button {
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search button:hover {
+    background-color: #0056b3;
+}
+
+.task-search a button {
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.task-search a button:hover {
+    background-color: #0056b3;
+}
+
+/* Style pour toutes les tâches */
+.all-task {
+    margin-top: 20px;
+}
+
+.task-details {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.form .top input[type="text"],
+.form .top input[type="date"] {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+    width: calc(50% - 10px);
+}
+
+.form textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.time input[type="time"] {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.actions a button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.actions a button:hover {
+    color: #007bff;
+}
+
+.actions .complete-icon {
+    color: #28a745;
+}
+
+.actions .edit-icon {
+    color: #ffc107;
+}
+
+.actions .delete-icon {
+    color: #dc3545;
+}
+

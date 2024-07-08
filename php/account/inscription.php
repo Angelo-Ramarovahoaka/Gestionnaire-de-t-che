@@ -39,6 +39,7 @@
     <div class="inscription">
     <a href="javascript:history.back()" class="back-icon"><i class="fas fa-arrow-left"></i> Retour</a>
         <h2>Inscription</h2>
+
         <form class="from_inscription" action="<?php inscription() ?>" method="post">
             <input type="text" id="username" name="username" placeholder="username" required><br>
             <input type="text" id="email" name="email" placeholder="email"required><br>

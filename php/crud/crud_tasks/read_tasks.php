@@ -37,11 +37,82 @@ if (isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../../../css/task.css">
     <title>gestion de tache</title>
 </head>
 <body>
-<div class="d-flex justify-content-around nav p-2">
+    <nav>
+        <div class="profile">
+            <img src="../../../image/bg.jpg" alt="" class="user-photo">
+            <span class="username">'.$_SESSION["username"].'</span>
+        </div>
+        <div>
+            <span class="title-project">LAMINA</span>
+        </div>
+        <div class="settings">
+            <span class="logout"><a href="../../account/logout.php">logout ?</a></span>
+            <button type="button"><i class="fas fa-cog"></i></button>
+        </div>
+    </nav>
+        <div class="event">
+            <form>
+                <div class="event-header">
+                    <input type="text" class="event-title" value="'.$event['title'].'" disabled>
+                    <label class="event-date">
+                        Date de planification:
+                        <time datetime="">'.$event['created_at'].'</time>
+                    </label>
+                </div>
+                <div class="event-details">
+                    <textarea class="event-description" disabled>'.$event['description'].'</textarea>
+                    <div class="event-timing">
+                        <div class="event-start">
+                            <label>Start: <input type="date" id="start_date" name="start_date" value="'.$event['start_date'].'"disabled>
+                            </label>
+                            <input type="time" id="start_time" name="start_time" value="'.$event['start_time'].'"disabled>
+                        </div>
+                        <div class="event-start">
+                            <label>End: <input type="date" name="end_date" value="'.$event['end_date'].'" disabled>
+                            </label>
+                            <input type="time" id="start_time" name="end_time" value="'.$event['end_time'].'"disabled>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    <div class="task-search">
+        <form class="search" method="GET">
+            <input type="text" name="search" id="search" placeholder="search...">
+            <button type="button"><i class="fas fa-search"></i></button>
+        </form>
+        <a href="read_event.php"><button><i class="fas fa-arrow-right"></i></button></a>
+    </div>   
+    <div class="all-task">
+        <div class="task-details">
+            <form action="" method="post" class="form">
+                <div class="top">
+                    <input type="text" name="title" value="title" placeholder="title">
+                    <input type="date" name="date" value="12-12-12" >
+                </div>
+                <textarea name="description" id="description"></textarea>
+                <div class="bottom">
+                    <div class="time">
+                        <input type="time" name="start_time" value="12:12">
+                        <input type="time" name="end_time" value="12:12">
+                    </div>
+                    
+                    <div class="actions">
+                        <a href=""><button  title="Compléter"><i class="fas fa-check complete-icon"></i></button></a>
+                        <a href=""><button  title="Modifier"><i class="fas fa-edit edit-icon"></i></button></a>
+                        <a href=""><button  title="Supprimer"><i class="fas fa-trash delete-icon"></i></button></a>
+                    </div>
+                </div>
+            </form>   
+        </div>
+        <!-- ici se trouve d\'autre tache -->
+    </div>
+    <div class="d-flex justify-content-around nav p-2">
     <h1 class="">TASKS FOR '. $_SESSION['username'].' event '.$event['title'].'</h1>
     <div class="">
         <button><a href="../crud_event/read_event.php">retour </a></button>
@@ -58,7 +129,7 @@ if (isset($_GET['id'])) {
 </div>
 <ul class="d-flex align-item-center justify-content-around flex-wrap w-100 h-100">';
 foreach ($tasks as $task){
-    echo '<li class="A task-item d-flex flex-column justify-content-center p-3 m-2 '.($task['status'] ? 'complete-task' : 'pending-task').'">
+    echo '<li class="A task-item d-flex flex-column justify-content-center p-3 m-2 '.($task['status'] ? 'complete-task' : '').'">
             <h3>'.$task['title'].'</h3>
             <input type="text" value="'.$task['description'].'" disabled>
             <time>'.$task['created_at'].'</time>
@@ -80,3 +151,5 @@ echo '</ul>
     echo "ID de l'événement non spécifié.";
 }
 ?>
+
+                

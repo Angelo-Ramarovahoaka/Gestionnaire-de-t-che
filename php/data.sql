@@ -8,6 +8,7 @@ CREATE TABLE users (
     username VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
     password VARCHAR(255) NOT NULL,
+    image TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -17,8 +18,10 @@ CREATE TABLE events (
     title VARCHAR(100) NOT NULL,
     description TEXT,
     status BOOLEAN DEFAULT FALSE,
-    start_time DATE NOT NULL,
-    end_time DATE NOT NULL,
+    start_date DATE ,
+    start_time TIME,
+    end_date DATE,
+    end_time TIME,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
@@ -29,9 +32,9 @@ CREATE TABLE tasks (
     title VARCHAR(100) NOT NULL,
     description TEXT,
     status BOOLEAN DEFAULT FALSE,   
-    start_time DATETIME,
-    end_time DATETIME,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    start_time TIME,
+    end_time TIME,
+    task_date DATE,
     FOREIGN KEY (event_id) REFERENCES events(id)
 );
 

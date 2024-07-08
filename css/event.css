@@ -89,9 +89,17 @@ nav {
         margin: 10px 0;
         font-size: 20px;
     }
-
-    .settings {
+    .title{
+        display: flex;
+        justify-content: center;
+    }
+    .settings{
+        display: flex;
+        justify-content: end;
         align-self: flex-end;
+    }
+    .title,.profile,.settings{
+        width: 100%;
     }
 }
 
@@ -126,10 +134,15 @@ main {
 }
 
 .show {
+    position: -webkit-sticky; /* Pour la compatibilité avec certains navigateurs */
+    position: sticky;
+    top: 0; 
+    z-index: 10;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    background-color: #ffffff;
 }
 
 .search {
@@ -170,7 +183,7 @@ main {
     gap: 10px;
 }
 
-.event button {
+.event button, .ssp{
     background: #2ecc71;
     color: #fff;
     border: none;
@@ -179,9 +192,9 @@ main {
     border-radius: 5px;
     cursor: pointer;
     transition: background 0.3s;
-}
-
-.event button:hover {
+    text-decoration: none;
+} 
+.ssp:hover, .event button:hover {
     background: #27ae60;
 }
 
@@ -231,7 +244,6 @@ main {
     transition: border-bottom 0.3s;
     outline: none;
 }
-
 .event-title:focus,
 .event-date input[type="date"]:focus,
 .event-date input[type="time"]:focus {
@@ -320,5 +332,107 @@ main {
 @media (max-width: 1060px) {
     .events-grid {
         grid-template-columns: 1fr;
+    }
+}
+.complete-event{
+    background-color: var(--color_5);
+    z-index: 1;
+}
+.show{
+    align-items: flex-start;
+}
+
+/* Style de base pour le formulaire */
+.add{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row-reverse;
+}
+.form {
+    background-color: #f9f9f9; 
+    border: 1px solid #ddd; 
+    border-radius: 10px; 
+    padding: 20px; 
+    width: 50%;
+    min-width: 300px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 30px;
+}
+
+/* Style pour les labels */
+.form label {
+    font-weight: bold; 
+    margin-bottom: 10px; 
+    display: block;
+    color: #333; 
+}
+
+/* Style pour les champs de texte et la textarea */
+.form input[type="text"], .form textarea {
+    width: 100%; 
+    padding: 10px; 
+    margin-bottom: 15px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    box-sizing: border-box; 
+    font-size: 14px; 
+}
+.form input[type="date"], .form input[type="time"]{
+    width: 30%;
+    min-width: 150px;
+    padding: 10px; 
+    margin-bottom: 15px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    box-sizing: border-box; 
+    font-size: 14px; 
+}
+
+/* Style pour le conteneur des dates et heures */
+.time {
+    display: flex; 
+    justify-content: space-between;
+     /* flex-direction: column; */
+    gap: 10px; 
+    width: 100%; 
+    margin-bottom: 15px; 
+}
+
+.time label {
+    display: flex; 
+    flex-direction: column;
+    gap: 5px; 
+    font-weight: normal; /* Poids de police normal */
+    color: #666; /* Couleur de texte grisé */
+}
+
+/* Style pour le bouton de soumission */
+.btn-submit {
+    background-color: #007bff; /* Couleur de fond bleu */
+    color: #fff; /* Couleur du texte blanche */
+    padding: 10px 15px; /* Espacement intérieur */
+    border: none; /* Suppression des bordures */
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer; /* Curseur pointer */
+    transition: background-color 0.3s ease; /* Animation de transition pour le changement de couleur */
+}
+
+.btn-submit:hover {
+    background-color: #0056b3; /* Couleur de fond bleu plus foncée au survol */
+}
+@media (max-width: 800px) {
+    .add{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+       align-items: center;
+        
+    }
+    .show{
+        justify-content: end;
+        width: 100%;
+    }
+    .form{
+        margin: 0px;
     }
 }

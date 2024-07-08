@@ -30,10 +30,9 @@
             return $events;
         }
         else{
-            $stmt=$pdo->prepare('SELECT * FROM events WHERE user_id = :user_id ORDER BY title ASC');
+            $stmt=$pdo->prepare('SELECT * FROM events WHERE user_id = :user_id ORDER BY created_at DESC');
             $stmt->execute(['user_id'=>$user_id]);
             $events=$stmt->fetchAll();
-
             return $events;
         }
         }
@@ -47,18 +46,18 @@
     <link rel="stylesheet" href="../../../css/event.css">
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
    
-    <title>gestion de tache</title>
+    <title>lamina</title>
 </head>
 <body>
     <?php $events=read_Event()?>
     
     <nav>
         <div class="profile">
-            <img src="../../image/bg.jpg" alt="" class="user-photo">
+            <img src="../../../image/bg.jpg" alt="" class="user-photo">
             <span class="username"><?php echo $_SESSION["username"] ?></span>
         </div>
         <div>
-            <span class="title-project">My tasks</span>
+            <span class="title-project">LAMINA</span>
         </div>
         <div class="settings">
             <span class="logout"><a href="../../account/logout.php">logout ?</a></span>
@@ -73,7 +72,7 @@
                 </form>
                 <div class="event">
                     <a href="create_event.php"><button class="add-event">ADD-EVENT</button></a>
-                    <a href="read-event.php"><button class="all-event">ALL-EVENT</button></a>
+                    <a href="read_event.php" class="ssp">ALL-EVENT</a>
                 </div>
         </div>
         <div class="events-grid">
@@ -90,7 +89,7 @@
                     'end_time'=>$event['end_time']
                 ];
                 echo '
-                <div class="event">
+                <div class="event '.($event['status'] ? 'complete-event' : '').'">
                 <form>
                     <div class="event-header">
                         <input type="text" class="event-title" value="'.$event['title'].'">
@@ -98,16 +97,23 @@
                             Date de planification:
                             <time datetime="">'.$event['created_at'].'</time>
                         </label>
-                        <a href="../crud_tasks/read_tasks.php?id='.$event['id'].'"><button class="add-event">Details</button></a>
+                        <a href="../crud_tasks/read_tasks.php?id='.$event['id'].'" class="ssp">
+                            Details
+                        </a>
+
                     </div>
                     <div class="event-details">
                         <textarea class="event-description">'.$event['description'].'</textarea>
                         <div class="event-timing">
                             <div class="event-start">
-                                <label>Start: <input type="datetime-local" name="start_time" value="'.$event['start_time'].'" disabled></label>
+                                <label>Start: <input type="date" id="start_date" name="start_date" value="'.$event['start_date'].'"disabled>
+                                </label>
+                                <input type="time" id="start_time" name="start_time" value="'.$event['start_time'].'"disabled>
                             </div>
                             <div class="event-start">
-                                <label>End: <input type="datetime-local" name="start_time" value="'.$event['start_time'].'" disabled></label>
+                                <label>End: <input type="date" name="end_date" value="'.$event['end_date'].'" disabled>
+                                </label>
+                                <input type="time" id="start_time" name="end_time" value="'.$event['end_time'].'"disabled>
                             </div>
                         </div>
                     </div>

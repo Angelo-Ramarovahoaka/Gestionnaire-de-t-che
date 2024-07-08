@@ -2,7 +2,7 @@
     require "../../db.php";
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
-    
+        print_r($id);
         $stmt = $pdo->prepare("SELECT status FROM events WHERE id = :id");
         $stmt->execute(['id' => $id]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);   

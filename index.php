@@ -14,7 +14,6 @@
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                 var_dump($_SESSION['username']);
-                // session_regenerate_id(true);
                 header("Location: php/crud/crud_event/read_event.php");
                 exit;
             } else {
@@ -30,11 +29,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/account/login.css">
-    <title>gestion de tache</title>
+    <title>lamina</title>
 </head>
 <body>
         
-    <h1 class="">TASKS</h1>
+    <h1 class="">LAMINA</h1>
     <div class="loader-container">
         <div class="spinner"></div>
         <div class="btn">

@@ -10,7 +10,6 @@
             if ($result !== false) { 
                 $newStatus = (int)!$result['status']; // Si status est TRUE (1), $newStatus devient FALSE (0) et vice versa
                 print_r($newStatus);
-        
                 $updateStmt = $pdo->prepare("UPDATE tasks SET status = :newStatus WHERE id = :id");
                 $updateStmt->execute(['newStatus' => $newStatus, 'id' => $id]);
             } 

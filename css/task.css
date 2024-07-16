@@ -16,6 +16,9 @@ nav {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     color: var(--color_1);
     font-family: 'Arial', sans-serif;
+    position: sticky;
+    top: 7px;
+    z-index: 2;
 }
 
 /* Style pour le profil utilisateur */
@@ -125,13 +128,10 @@ nav {
 
 /* Style général pour la page */
 
-main {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+ body{
+   display: flex;
+   justify-content: center;
+   flex-direction: column;
 }
 
 /* Style pour les événements */
@@ -140,7 +140,6 @@ main {
     padding: 20px;
     margin: 20px;
     min-width: none;
-    width: 80%;
     border-radius: 8px;
     background-color: #f9f9f9;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -223,8 +222,14 @@ main {
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 82px;
+    z-index: 2;
 }
-
+.search{
+    display: flex;
+    padding: 20px;
+}
 .search input[type="text"] {
     border: 1px solid #ddd;
     padding: 10px;
@@ -245,7 +250,10 @@ main {
 .search button:hover {
     background-color: #0056b3;
 }
-
+.task-nav{
+    display: flex;
+    gap: 20px;
+}
 .task-search a button {
     border: none;
     background-color: #007bff;
@@ -262,7 +270,7 @@ main {
 
 /* Style pour toutes les tâches */
 .all-task {
-    margin-top: 20px;
+    margin: 20px 60px;
 }
 
 .task-details {
@@ -271,7 +279,13 @@ main {
     margin-bottom: 20px;
     border-radius: 8px;
     background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}  
+.task-details:hover{
+    box-shadow: 0px 3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+#description, .task-details:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--color_4);
 }
 
 .form .top {
@@ -286,16 +300,17 @@ main {
     border: 1px solid #ddd;
     padding: 10px;
     border-radius: 4px;
-    width: calc(50% - 10px);
+    min-width: 100px;
+    background-color: #ddd;
 }
 
 .form textarea {
     width: 100%;
-    min-height: 100px;
+    min-height: 30px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    resize: vertical;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .bottom {
@@ -310,6 +325,7 @@ main {
     padding: 10px;
     border-radius: 4px;
     margin-right: 10px;
+    background-color: #ddd;
 }
 
 .actions a button {
@@ -335,5 +351,126 @@ main {
 
 .actions .delete-icon {
     color: #dc3545;
+}
+
+
+
+
+
+
+/* Styles généraux */
+
+/* Styles pour la navigation et le titre */
+.nav_create {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.nav_create h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.nav_create button {
+    background-color: #555;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.nav_create button a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav_create button:hover {
+    background-color: #777;
+}
+
+/* Styles pour le formulaire */
+.cover_form {
+    max-width: 600px;
+    margin: 30px auto;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.cover_form .form {
+    display: flex;
+    flex-direction: column;
+}
+
+.cover_form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.cover_form input[type="text"],
+.cover_form textarea,
+.cover_form input[type="time"],
+.cover_form input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.cover_form textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+.time {
+    display: flex;
+    justify-content: space-between;
+}
+
+.time > div {
+    flex: 1;
+    margin-right: 10px;
+    margin: 20px;
+}
+
+.time > div:last-child {
+    margin-right: 0;
+}
+
+/* Styles pour le bouton de soumission */
+.btn-submit {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.btn-submit:hover {
+    background-color: #218838;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .time {
+        flex-direction: column;
+    }
+
+    .time > div {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .time > div:last-child {
+        margin-bottom: 0;
+    }
+}
+.complete-task{
+    background-color: rgba(20, 15, 15, 0.5)
 }
 

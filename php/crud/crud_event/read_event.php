@@ -36,6 +36,40 @@
             return $events;
         }
         }
+    function modifyEvent($id){
+        session_start();
+
+        require'../../db.php';
+        $user_id = $_SESSION['user_id'];
+        if($_SERVER['REQUEST_METHOD']== 'POST' && isset($_GET['id'])){   
+            // echo "ito ndray";
+            $title=$_POST["title"];
+            $description=$_POST["description"];
+            $start_date= $_POST["start_date"];
+            $start_time= $_POST["start_time"];
+            $end_date = empty($_POST["end_date"]) ? NULL : $_POST["end_date"];
+            $end_time=$_POST["end_time"];
+            $id=$_GET['id'];
+            // print_r($id);
+            $stmt=$pdo->prepare("UPDATE events SET title = :title , description = :description , start_date= :start_date , start_time= :start_time , end_date= :end_date , end_time= :end_time WHERE id = :id ");
+            $stmt->execute([
+                'title' => $title,
+                'description' => $description,
+                'start_date' => $start_date,
+                'start_time' => $start_time,
+                'end_date' => $end_date,
+                'end_time' => $end_time,
+                'id' => $id
+            ]);
+
+            $stmt=$pdo->prepare('SELECT * FROM events WHERE user_id = :user_id ORDER BY created_at DESC');
+            $stmt->execute(['user_id'=>$user_id]);
+            $events=$stmt->fetchAll();
+            return $events;
+            
+        }
+        // header('location: read_event.php');
+    }
         ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,14 +119,17 @@
                     'title' => $event['title'],
                     'description'=>$event['description'],
                     'created_at'=>$event['created_at'],
+                    'start_date'=>$event['start_date'],
+                    'end_date'=>$event['end_date'],
                     'start_time'=>$event['start_time'],
                     'end_time'=>$event['end_time']
                 ];
                 echo '
                 <div class="event '.($event['status'] ? 'complete-event' : '').'">
-                <form>
+                <form action="'.modifyEvent($event['id']).'" method="POST">
                     <div class="event-header">
-                        <input type="text" class="event-title" value="'.$event['title'].'">
+                        <input type="text" class="event-title" name="title" value="'.$event['title'].'">
+                        <input type="hidden" value="'.$event['id'].'">
                         <label class="event-date">
                             Date de planification:
                             <time datetime="">'.$event['created_at'].'</time>
@@ -103,23 +140,23 @@
 
                     </div>
                     <div class="event-details">
-                        <textarea class="event-description">'.$event['description'].'</textarea>
+                        <textarea class="event-description" name="description">'.$event['description'].'</textarea>
                         <div class="event-timing">
                             <div class="event-start">
-                                <label>Start: <input type="date" id="start_date" name="start_date" value="'.$event['start_date'].'"disabled>
+                                <label>Start: <input type="date" id="start_date" name="start_date" value="'.$event['start_date'].'">
                                 </label>
-                                <input type="time" id="start_time" name="start_time" value="'.$event['start_time'].'"disabled>
+                                <input type="time" id="start_time" name="start_time" value="'.$event['start_time'].'">
                             </div>
                             <div class="event-start">
-                                <label>End: <input type="date" name="end_date" value="'.$event['end_date'].'" disabled>
+                                <label>End: <input type="date" name="end_date" value="'.$event['end_date'].'">
                                 </label>
-                                <input type="time" id="start_time" name="end_time" value="'.$event['end_time'].'"disabled>
+                                <input type="time" id="end_time" name="end_time" value="'.$event['end_time'].'">
                             </div>
                         </div>
                     </div>
                     <div class="event-actions">
                         <a href="complete_event.php?id='.$event['id'].'"><i class="fas fa-check-circle" title="Complete"></i></a>
-                        <a href=""><i class="fas fa-edit" title="Modifier" onclick=""></i></a>
+                        <button type="submit"><i class="fas fa-edit" title="Modifier" onclick=""></i></button>
                         <a href="delete_event.php?id='. $event['id'].'"><i class="fas fa-trash-alt" title="Supprimer"></i></a>
                         <a href="">  <i class="fas fa-share-alt" title="Partager"></i></a>  
                     </div>
